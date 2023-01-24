@@ -1,7 +1,6 @@
 package jpabook.jpashop;
 
-import jpabook.jpashop.domain.Member;
-import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.Book;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,13 +17,11 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Order order = em.find(Order.class, 1L);
-            Long memberId = order.getMemberId();
+            Book book = new Book();
+            book.setName("JPA");
+            book.setAuthor("김영한");
 
-            Member member = em.find(Member.class, memberId);
-
-            // 객체지향적
-            Member findMember = order.getMember();
+            em.persist(book);
 
             tx.commit();
         } catch(Exception e) {
